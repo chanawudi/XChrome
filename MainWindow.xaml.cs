@@ -106,9 +106,9 @@ namespace XChrome
         /// <returns></returns>
         private async Task<bool> WenLoaded()
         {
-            //检测更新
-            AutoUpdater.SetOwner(this);
-            AutoUpdater.Start("https://down.web3tool.vip/xchrome/xchrome_update.xml");
+            ////检测更新
+            //AutoUpdater.SetOwner(this);
+            //AutoUpdater.Start("https://down.web3tool.vip/xchrome/xchrome_update.xml");
 
             Func<Task> load = async () => {
                 //初始化日志

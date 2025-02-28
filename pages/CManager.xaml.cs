@@ -494,6 +494,7 @@ namespace XChrome.pages
                 xc.DataPath=System.IO.Path.Combine(cs.Config.chrome_data_path, it.id.ToString());
                 xc.Evns=it.envs??"";
                 xc.Name = it.name;
+                xc.Extensions = it.extensions;
                 await Task.Run(async () => {
                     await XChromeManager.OpenChrome(xc);
                     //打开一个后，排列下

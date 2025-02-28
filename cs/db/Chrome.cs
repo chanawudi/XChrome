@@ -97,5 +97,13 @@ namespace XChrome.cs.db
         /// remark
         /// </summary>
         public System.String envs { get { return this._envs; } set { this._envs = value; } }
+
+        private System.String _extensions = "";
+        /// <summary>
+        /// remark
+        /// </summary>
+        public System.String extensions { get { return this._extensions; } set { this._extensions = value; } }
+
+        //
     }
 }

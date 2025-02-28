@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Shapes;
 using XChrome.cs.db;
 using XChrome.cs.tools.YTools;
 using XChrome.cs.win32;
@@ -51,17 +52,52 @@ namespace XChrome.cs
         public static async Task OpenChrome(XChrome x)
         {
 
-            if(playwright==null) 
+            if(playwright==null)
+            {
                 playwright = await Playwright.CreateAsync();
+            }
+
+
+
+            //;
+            // 拼接出 AppData 目录："C:\Users\chanawudi\AppData"
+            //string appDataPath = Path.Combine(userProfile, "AppData");
 
 
             //一些参数
             #region =====启动参数=========
 
             List<string> args = new List<string>();
-            //args.Add("--disable-web-security");
             args.Add("--disable-features=IsolateOrigins,site-per-process");
             args.Add("--disable-features=ChromeLabs");
+
+            //插件
+            List<string> extensionList = new List<string>();
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            if (Directory.Exists(userProfile))
+            {
+                string expath = System.IO.Path.Combine(userProfile, "AppData", "Local", "Google", "Chrome", "User Data", "Default", "Extensions");
+                string[] el=x.Extensions.Split("|");
+                foreach (string ext in el) {
+                    var _e = ext.Trim();
+                    string _ep = expath + "\\" + _e;
+                    if (System.IO.Path.Exists(_ep)) { 
+                        var ds=System.IO.Directory.GetDirectories(_ep);
+                        if (ds.Count() > 0) {
+                            string _ep1 = ds[0];
+                            extensionList.Add(_ep1);
+                        }
+                    }
+                }
+            }
+            if (extensionList.Count() > 0) {
+                string _exlist = string.Join(",", extensionList);
+                args.Add($"--disable-extensions-except="+ _exlist);
+                args.Add($"--load-extension="+ _exlist);
+            }
+
+           
+
 
             #endregion
 
@@ -72,7 +108,8 @@ namespace XChrome.cs
             var options = new BrowserTypeLaunchPersistentContextOptions()
             {
                 UserAgent = x.UserAgent,
-                ExecutablePath = Path.Combine(Directory.GetCurrentDirectory(), ".playwright", "chrome", "chromium-1117", "chrome-win", "chrome.exe"),
+                ExecutablePath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), ".playwright", "chrome", "chromium-1117", "chrome-win", "chrome.exe"),
+                //ExecutablePath= "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
                 Headless = false,
                 Proxy = getProxy(x.Proxy),
                 Args = args,
@@ -825,6 +862,8 @@ namespace XChrome.cs
         public string UserAgent { get; set; } = "";
 
         public string Evns { get; set; } = "";
+
+        public string Extensions { get; set; } = "";
 
         public ViewportSize? ViewportSize { get; set; } = null;
 

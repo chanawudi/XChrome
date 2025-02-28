@@ -93,6 +93,7 @@ namespace XChrome.forms
             proxytext = o.proxyText;
             chrome_id_text.Text=id.ToString();
             othertxt.Text = o.envs;
+            exlist_text.Text = (o.extensions ?? "").Replace("|","\r\n");
             //设置分组
             long groupid = o.groupId.Value;
             var group=groupList.Items.OfType<Group>().FirstOrDefault(it=>it.id == groupid);
@@ -102,6 +103,7 @@ namespace XChrome.forms
 
         private async void AdonisWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //exlist_text
             //加载分组
             await loadGroup();
 
@@ -191,6 +193,7 @@ namespace XChrome.forms
             c.remark = remark;
             c.tags = "";
             c.envs=othertxt.Text.Trim();
+            c.extensions =exlist_text.Text.Trim().Replace("\r\n","|").Replace("\n","|");
             //othertxt
 
             var db = MyDb.DB;

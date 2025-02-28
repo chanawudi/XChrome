@@ -8,11 +8,12 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     Title="EditChrome"
     Width="777"
-    Height="600"
+    Height="600"  
     IconVisibility="Hidden"
     TitleVisibility="Hidden"
     ShrinkTitleBarWhenMaximized="False" Loaded="AdonisWindow_Loaded"                        
     PlaceTitleBarOverContent="True" WindowStartupLocation="CenterOwner">
+    <!--600-->
     <!-- 外层ScrollViewer用于约束高度并出现滚动条 -->
     <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,20,0,0" HorizontalScrollBarVisibility="Disabled">
         <Grid>
@@ -29,6 +30,7 @@
                 <RowDefinition Height="90"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="190"></RowDefinition>
+                <RowDefinition Height="155"></RowDefinition>
                 <RowDefinition Height="90"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -111,8 +113,20 @@
             </StackPanel>
 
 
+            <Label Content="插件：" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" FontSize="14" Grid.Column="0" Grid.Row="8"></Label>
+            <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Vertical" VerticalAlignment="Top" Margin="0,10,0,0">
+                <TextBox x:Name="exlist_text" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Visible" AcceptsReturn="True" VerticalContentAlignment="Top" Width="400" Height="80"  Margin="0,0,0,5" ></TextBox>
+                <TextBlock>
+                    插件ID，一行一个<LineBreak/>
+                    该插件，必须是你电脑默认chrome浏览器已经安装了的插件<LineBreak/>
+                    请注意：如果你默认chrome浏览器卸载了插件，这里会调用失败
+                </TextBlock>
+            </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal">
+
+
+
+            <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal">
                 <Button Click="Button_Click" HorizontalAlignment="Center" Height="35" Width="100" Margin="5" VerticalAlignment="Center" Style="{DynamicResource {x:Static adonisUi:Styles.AccentButton}}">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <iconPacks:PackIconFontAwesome Kind="CheckSolid" Width="20" Height="15"  VerticalAlignment="Center"  Margin="0,0,4,0"/>

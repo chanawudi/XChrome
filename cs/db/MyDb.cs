@@ -68,6 +68,10 @@ name TEXT, userAgent TEXT,proxy TEXT,proxyText TEXT,groupId INTEGER,createDate D
             sql = "ALTER TABLE [Chrome] ADD COLUMN envs TEXT";
             try { await db.Ado.ExecuteCommandAsync(sql); } catch (Exception ex) { }
 
+            //chrome 增加其他环境参数 extensions
+            sql = "ALTER TABLE [Chrome] ADD COLUMN extensions TEXT";
+            try { await db.Ado.ExecuteCommandAsync(sql); } catch (Exception ex) { }
+
 
             db.Close();
         }

@@ -23,7 +23,7 @@
                     Height="24"
                     Margin="0,22,0,0"/>
 
-            <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0"  TextWrapping="Wrap" Text="...加载中..." FontSize="16" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0"  TextWrapping="Wrap" Text="...修改版加载中..." FontSize="16" VerticalAlignment="Top"/>
         </StackPanel>
     </Grid>
 </adonisControls:AdonisWindow>

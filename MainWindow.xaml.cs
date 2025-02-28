@@ -1,4 +1,4 @@
-﻿#region copyright
+#region copyright
 /**
 // --------------------------------------------------------------------------------
 // 文件名：MainWindow.xaml.cs
@@ -106,19 +106,6 @@ namespace XChrome
         /// <returns></returns>
         private async Task<bool> WenLoaded()
         {
-#if DEBUG
-
-#else
-            //登陆码
-            Login login=new Login();
-            login.Owner = this;
-            login.ShowDialog();
-            if (!login.isLoginSuccess) {
-                return false;
-            }
-#endif
-
-
             //检测更新
             AutoUpdater.SetOwner(this);
             AutoUpdater.Start("https://down.web3tool.vip/xchrome/xchrome_update.xml");
